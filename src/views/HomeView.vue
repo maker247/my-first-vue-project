@@ -1,32 +1,23 @@
-<!-- <script>
-
-export default {
-  methods: {
-    flash(message) {
-      alert(message)
-    }
-  }
-}
-
-</script>
-
-<template>
-  <main>
-    <TheWelcome />
-    <button @click="flash('hello')">click me</button>
-  </main>
-</template> -->
-
 <script setup>
-  import { useFlash } from '@/composables/useFlash';
+import { useStorage } from '@/composables/useStorage';
 
-  let {flash} = useFlash();
+  let food = useStorage('food');
+
+  let age = useStorage('age');
+
+  let obj = useStorage('obj', {one: 'one'})
+
+  setTimeout(() => {
+    // obj.value = {'changed': 'entirely'};
+    
+    obj.value.one = "changed";
+  }, 3000) 
 </script>
 
 <template>
   <main>
-    <TheWelcome />
-    <button @click="flash('hello')">click me</button>
+    <p>What is your favourite food? <input type="text" v-model="food" /></p>
+    <p>What is your age? <input type="text" v-model="age" /></p>  
   </main>
 </template>
 
